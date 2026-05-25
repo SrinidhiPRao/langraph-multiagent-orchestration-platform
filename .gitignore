@@ -18,7 +18,6 @@ ENV/
 
 # Environment variables
 .env
-*.env
 
 # IDEs
 .vscode/
