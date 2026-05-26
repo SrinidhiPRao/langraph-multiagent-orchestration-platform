@@ -1,36 +1,24 @@
 # AI-Powered Multi-Agent Workflow Orchestration Platform
 
-An enterprise-style multi-agent orchestration platform built using LangGraph, FastAPI, LangSmith, and OpenTelemetry.
+A collaborative multi-agent orchestration system built using LangGraph, FastAPI, Groq LLMs, LangSmith, and OpenTelemetry.
 
-This system enables intelligent routing between specialized AI agents with workflow persistence, recovery handling, approval checkpoints, observability, and real-time updates.
+The platform intelligently routes user requests between specialized AI agents while supporting workflow persistence, recovery systems, approval checkpoints, observability, and real-time monitoring.
 
 ---
 
-# Features
+# Core Features
 
-## Multi-Agent Workflow System
-- Supervisor Agent
-- Researcher Agent
-- Coder Agent
-- Reviewer Agent
-- Writer Agent
-
-## Advanced Workflow Features
-- Conditional Routing
+- Multi-Agent Workflow Orchestration
+- Supervisor-Based Task Routing
+- Researcher, Coder, Reviewer & Writer Agents
+- Shared Workflow State Management
 - Error Recovery & Retry Logic
 - Human Approval Checkpoints
-- Real-Time Workflow Updates (WebSockets)
-
-## Persistence & Observability
-- SQLite Workflow Persistence
+- Workflow Persistence using SQLite
 - LangSmith Tracing
-- Prometheus Metrics
-- OpenTelemetry Support
-
-## API Layer
+- Prometheus/OpenTelemetry Metrics
 - FastAPI REST APIs
-- Swagger Documentation
-- WebSocket Support
+- WebSocket Real-Time Updates
 
 ---
 
@@ -41,19 +29,17 @@ User
  ↓
 FastAPI API Layer
  ↓
-LangGraph Supervisor
+Supervisor Agent
  ├── Researcher Agent
  ├── Coder Agent
  ├── Reviewer Agent
  └── Writer Agent
  ↓
-Recovery / Approval System
+Recovery & Approval System
  ↓
-Persistence Layer (SQLite)
+Persistence Layer
  ↓
-Observability
-   ├── LangSmith
-   └── Prometheus Metrics
+Observability Layer
 ```
 
 ---
@@ -67,8 +53,8 @@ Observability
 - Groq LLM
 - SQLite
 - LangSmith
-- Prometheus
 - OpenTelemetry
+- Prometheus
 
 ---
 
@@ -93,7 +79,7 @@ project/
 
 # Setup Instructions
 
-## 1. Clone Repository
+## Clone Repository
 
 ```bash
 git clone <repo_url>
@@ -102,7 +88,7 @@ cd <project_name>
 
 ---
 
-## 2. Install Dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -110,7 +96,7 @@ pip install -r requirements.txt
 
 ---
 
-## 3. Create Environment File
+## Create Environment File
 
 Copy:
 
@@ -120,7 +106,7 @@ Copy:
 
 ---
 
-## 4. Add Environment Variables
+## Add Environment Variables
 
 ```env
 GROQ_API_KEY=your_groq_api_key
@@ -143,9 +129,7 @@ uvicorn api.main:app --reload
 
 # API Documentation
 
-After server starts:
-
-## Swagger UI
+Swagger UI:
 
 ```text
 http://127.0.0.1:8000/docs
@@ -153,7 +137,7 @@ http://127.0.0.1:8000/docs
 
 ---
 
-# REST APIs
+# APIs
 
 ## Start Workflow
 
@@ -161,31 +145,17 @@ http://127.0.0.1:8000/docs
 POST /workflow/start
 ```
 
-Example:
-
-```json
-{
-  "query": "Write quicksort in python"
-}
-```
-
----
-
 ## Get Workflow Status
 
 ```http
 GET /workflow/{request_id}
 ```
 
----
-
 ## Approve Workflow
 
 ```http
 POST /workflow/{request_id}/approve
 ```
-
----
 
 ## Reject Workflow
 
@@ -195,7 +165,7 @@ POST /workflow/{request_id}/reject
 
 ---
 
-# WebSocket Endpoint
+# WebSocket Support
 
 ```text
 ws://127.0.0.1:8000/ws/{request_id}
@@ -211,59 +181,14 @@ Provides real-time workflow updates.
 http://127.0.0.1:8000/metrics
 ```
 
-Tracks:
-- workflow_success_total
-- workflow_failure_total
-- workflow_retry_total
-
----
-
-# LangSmith Tracing
-
-Workflow traces are available on:
-
-```text
-https://smith.langchain.com
-```
-
-Features:
-- Agent execution traces
-- Latency tracking
-- Workflow debugging
-- Input/output monitoring
-
 ---
 
 # Testing
-
-Run tests using:
 
 ```bash
 pytest
 ```
 
----
-
-# Implemented User Stories
-
-- US-09 Conditional Routing Logic
-- US-10 Error Recovery Subgraphs
-- US-11 Approval Checkpoint System
-- US-12 Approval UI/APIs
-- US-13 Workflow State Persistence
-- US-14 LangSmith Tracing
-- US-15 OpenTelemetry Metrics
-
----
-
-# Future Improvements
-
-- Parallel Agent Execution
-- Redis Persistence
-- JWT Authentication
-- React Dashboard
-- Kubernetes Deployment
-- CI/CD Pipeline
 
 ---
 
