@@ -8,6 +8,7 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import SystemMessage, HumanMessage
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from core.state import SharedState, AgentMessage, TaskResult
+from langsmith import traceable
 
 # Load environment variables
 load_dotenv()
@@ -54,7 +55,7 @@ def set_llm_function(fn):
     global _llm_fn
     _llm_fn = fn
 
-
+@traceable(name="execute_agent")
 # Shared Agent Execution Helper
 def execute_agent(
     *,
@@ -163,6 +164,7 @@ Return code inside markdown triple backticks.
 
 
 def coder_node(state: SharedState) -> dict:
+    
     return execute_agent(
         state=state,
         agent_name="coder",
